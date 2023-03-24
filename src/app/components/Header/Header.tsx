@@ -25,17 +25,19 @@ const Header: FC = () => {
   };
 
   return (
-    <div className="flex flex-row items-center gap-2 p-4 w-full max-w-screen-xl ">
-      <span className="text-4xl mr-4">News App</span>
-
-      {renderButton(`${country}/news`, 'Top News', route === 'news')}
-      {renderButton(`${country}/categories`, 'Categories', route === 'categories')}
-      {renderButton(`${country}/search`, 'Search', route === 'search')}
-
-      <div className="grow" />
-
-      {renderButton(`gb/${route}`, 'GB', country === 'gb')}
-      {renderButton(`us/${route}`, 'US', country === 'us')}
+    <div className="w-full border-b-2 border-sky-300">
+      <div className='flex flex-row items-center m-auto gap-2 p-4 max-w-screen-xl'>
+        <span className="text-4xl mr-4">News App</span>
+  
+        {renderButton(`${country}/news`, 'Top News', route === 'news')}
+        {renderButton(`${country}/categories`, 'Categories', route === 'categories')}
+        {renderButton(`${country}/search`, 'Search', route === 'search')}
+  
+        <div className="grow" />
+  
+        {renderButton(`gb/${route}`, 'GB', country === 'gb')}
+        {renderButton(`us/${route}`, 'US', country === 'us')}
+      </div>
     </div>
   );
 };

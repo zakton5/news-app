@@ -1,4 +1,4 @@
-export interface Story {
+export interface Article {
   title: string;
   description: string | null;
   content: string | null;
