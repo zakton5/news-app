@@ -14,7 +14,7 @@ const SearchPage: FC<{ country: string }> = ({ country }) => {
 
   useEffect(() => {
     if (!query.trim()) {
-      setArticles([]);
+      setArticles(null);
       return;
     }
 
