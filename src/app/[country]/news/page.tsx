@@ -1,6 +1,5 @@
-import { Article } from '../../../models/article';
 import { NewsService } from '../../../services/api-service';
-import NewsCard from '../../components/NewsCard/NewsCard';
+import ArticleList from '../../components/ArticleList/ArticleList';
 
 export const metadata = {
   title: 'Top News',
@@ -18,11 +17,7 @@ export default async function Page({ params }: { params: { country: string } }) 
     <div>
       <h1 className="text-2xl">Top News</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
-        {articles.map((article) => {
-          return <NewsCard key={article.title} article={article} />;
-        })}
-      </div>
+      <ArticleList articles={articles} />
     </div>
   );
 }

@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex flex-col items-center bg-gray-100">
         <Header />
 
-        <main className="p-4 h-full max-w-screen-xl">{children}</main>
+        <main className="p-4 h-full max-w-screen-xl w-full">{children}</main>
       </body>
     </html>
   );

@@ -21,7 +21,7 @@ export default async function Page({ params }: { params: PageParams }) {
   const article = await getData(params.country, params.id);
 
   return (
-    <div className="max-w-xl">
+    <div className="max-w-xl m-auto">
 
       <h1 className="text-4xl mb-4">{article.title}</h1>
       <p className="text-xl mb-4">{article.description}</p>

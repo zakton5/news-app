@@ -12,16 +12,21 @@ export class NewsService {
     return articles;
   }
 
+  static async getTopNewsByQuery(country: string, query: string): Promise<Article[]> {
+    const topNewsUrl = `${baseUrl}/top-headlines?country=${country}&apiKey=${apiKey}&q=${query}`;
+    const res = await fetch(topNewsUrl);
+    const json = await res.json();
+    const articles: Article[] = json.articles;
+    return articles;
+  }
+
   /**
    * Retrieves a single article.
    * 
    * Using the title here because this API does not return IDs for the articles.
    */
   static async getArticle(country: string, title: string): Promise<Article> {
-    const topNewsUrl = `${baseUrl}/top-headlines?country=${country}&apiKey=${apiKey}&q=${title}`;
-    const res = await fetch(topNewsUrl);
-    const json = await res.json();
-    const article: Article = json.articles[0];
-    return article;
+    const articles = await this.getTopNewsByQuery(country, title);
+    return articles[0];
   }
 }
