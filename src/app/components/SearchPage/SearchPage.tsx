@@ -5,24 +5,33 @@ import { Article } from '../../../models/article';
 import { NewsService } from '../../../services/api-service';
 import ArticleList from '../ArticleList/ArticleList';
 import SearchBar from '../SearchBar/SearchBar';
+import { usePathname, useRouter } from 'next/navigation';
 
-const SearchPage: FC<{ country: string }> = ({ country }) => {
+const SearchPage: FC<{ country: string; initialQuery?: string }> = ({ country, initialQuery }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+
   const [articles, setArticles] = useState<Article[] | null>(null);
-  const [query, setQuery] = useState<string>('');
+  const [query, setQuery] = useState<string>(initialQuery ?? '');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!query.trim()) {
+    if (!query?.trim()) {
       setArticles(null);
       return;
+    } else {
+      // Preserve the search query in the url
+      const params = new URLSearchParams();
+      params.set('q', query);
+      router.replace(`${pathname}?${params}`);
     }
 
     // Fetch articles with a debounce whenever the search query changes
     const getData = setTimeout(async () => {
-      console.log('getting articles');
       setLoading(true);
       setError(null);
+
       try {
         const articles = await NewsService.getTopNewsByQuery(country, query);
         setArticles(articles);
@@ -34,12 +43,13 @@ const SearchPage: FC<{ country: string }> = ({ country }) => {
     }, 500);
 
     return () => clearTimeout(getData);
-  }, [query, country]);
+  }, [query, country, router, pathname]);
 
   return (
     <div className="w-full">
       <div className="mb-4">
         <SearchBar
+          initialValue={query}
           onChange={(value) => {
             setQuery(value);
           }}

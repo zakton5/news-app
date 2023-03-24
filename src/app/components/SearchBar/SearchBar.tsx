@@ -3,11 +3,12 @@
 import { FC, useState } from 'react';
 
 interface Props {
+  initialValue?: string;
   onChange: (value: string) => void;
 }
 
-const SearchBar: FC<Props> = ({ onChange }) => {
-  const [query, setQuery] = useState<string>('');
+const SearchBar: FC<Props> = ({ initialValue: value, onChange }) => {
+  const [query, setQuery] = useState<string>(value ?? '');
 
   return (
     <input
