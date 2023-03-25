@@ -10,7 +10,7 @@ interface Props {
   article: Article;
 }
 
-const NewsCard: FC<Props> = ({ article }) => {
+const ArticleCard: FC<Props> = ({ article }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [country] = pathname.substring(1).split('/');
@@ -39,4 +39,4 @@ const NewsCard: FC<Props> = ({ article }) => {
   );
 };
 
-export default NewsCard;
+export default ArticleCard;
