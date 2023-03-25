@@ -17,23 +17,24 @@ const SearchPage: FC<{ country: string; initialQuery?: string }> = ({ country, i
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!query?.trim()) {
+    // Preserve the search query in the url
+    const params = new URLSearchParams();
+    params.set('q', query);
+    router.replace(`${pathname}?${params}`);
+
+    if (!query.trim()) {
       setArticles(null);
       return;
-    } else {
-      // Preserve the search query in the url
-      const params = new URLSearchParams();
-      params.set('q', query);
-      router.replace(`${pathname}?${params}`);
     }
 
     // Fetch articles with a debounce whenever the search query changes
     const getData = setTimeout(async () => {
+      console.log('getting articles');
       setLoading(true);
       setError(null);
 
       try {
-        const articles = await ArticleService.getTopArticles(country, query);
+        const articles = await ArticleService.getTopNewsByQuery(country, query);
         setArticles(articles);
       } catch (err) {
         setError('Unable to load articles');

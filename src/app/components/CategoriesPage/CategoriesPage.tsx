@@ -3,7 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 import { Article } from '../../../models/article';
-import { NewsService } from '../../../services/api-service';
+import { ArticleService } from '../../../services/article-service';
 import ArticleList from '../ArticleList/ArticleList';
 import Link from 'next/link';
 
@@ -44,7 +44,7 @@ const CategoriesPage: FC<{ country: string; initialCategory?: string }> = ({ cou
       setArticles(null);
 
       try {
-        const articles = await NewsService.getTopNews(country, undefined, category);
+        const articles = await ArticleService.getTopArticles(country, undefined, category);
         setArticles(articles);
       } catch (err) {
         setError('Unable to load articles');

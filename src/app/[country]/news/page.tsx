@@ -1,4 +1,4 @@
-import { NewsService } from '../../../services/api-service';
+import { ArticleService } from '../../../services/article-service';
 import ArticleList from '../../components/ArticleList/ArticleList';
 
 export const metadata = {
@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 async function getData(country: string) {
-  return await NewsService.getTopNews(country);
+  return await ArticleService.getTopArticles(country);
 }
 
 export default async function Page({ params }: { params: { country: string } }) {

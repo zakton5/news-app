@@ -3,8 +3,8 @@ import { Article } from '../models/article';
 const apiKey = 'e29feb3a260a4d529122b7c931705f5f';
 const baseUrl = 'https://newsapi.org/v2';
 
-export class NewsService {
-  static async getTopNews(country: string, query?: string, category?: string): Promise<Article[]> {
+export class ArticleService {
+  static async getTopArticles(country: string, query?: string, category?: string): Promise<Article[]> {
     let topNewsUrl = `${baseUrl}/top-headlines?country=${country}&apiKey=${apiKey}`;
 
     if (category) {
@@ -29,7 +29,7 @@ export class NewsService {
    */
   static async getArticle(country: string, title: string, category?: string): Promise<Article | null> {
     console.log('getting article, ', country, title, category);
-    const articles = await this.getTopNews(country, title, category);
+    const articles = await this.getTopArticles(country, title, category);
     return articles.length ? articles[0] : null;
   }
 }

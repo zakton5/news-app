@@ -1,5 +1,5 @@
 import { Article } from '../../../../models/article';
-import { NewsService } from '../../../../services/api-service';
+import { ArticleService } from '../../../../services/article-service';
 import ArticlePage from '../../../components/ArticlePage/ArticlePage';
 
 interface Params {
@@ -13,7 +13,7 @@ interface Params {
 }
 
 async function getData(country: string, id: string, category?: string): Promise<Article> {
-  const article = await NewsService.getArticle(country, id, category);
+  const article = await ArticleService.getArticle(country, id, category);
 
   if (!article) {
     throw new Error('Unable to find article');
