@@ -33,7 +33,7 @@ const SearchPage: FC<{ country: string; initialQuery?: string }> = ({ country, i
       setError(null);
 
       try {
-        const articles = await NewsService.getTopNewsByQuery(country, query);
+        const articles = await NewsService.getTopNews(country, query);
         setArticles(articles);
       } catch (err) {
         setError('Unable to load articles');

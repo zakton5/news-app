@@ -21,7 +21,7 @@ const ArticlePage: FC<{ article: Article }> = ({ article }) => {
 
       <p className="mb-4">{article.content}</p>
 
-      <div className="text-sm" onClick={() => router.back()}>
+      <div className="text-sm cursor-pointer" onClick={() => router.back()}>
         &lsaquo; Back to list
       </div>
     </div>

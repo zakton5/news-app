@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { Article } from '../../../models/article';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 interface Props {
   article: Article;
@@ -12,10 +12,19 @@ interface Props {
 
 const NewsCard: FC<Props> = ({ article }) => {
   const pathname = usePathname();
-  const [country, route] = pathname.substring(1).split('/');
+  const searchParams = useSearchParams();
+  const [country] = pathname.substring(1).split('/');
+
+  let articleUrl = `${country}/news/${article.title}`;
+
+  // Add the category to the search URL if the categories page is open.
+  const category = searchParams.get('category');
+  if (category) {
+    articleUrl += `?category=${category}`;
+  }
 
   return (
-    <Link href={`${country}/news/${article.title}`}>
+    <Link href={articleUrl}>
       <div className="relative drop-shadow-xl rounded-lg bg-white overflow-hidden cursor-pointer transition hover:scale-105">
         <div className="relative h-60 border-b-2 border-sky-300">
           {article.urlToImage && <Image alt="headline image" src={article.urlToImage!} className="object-cover" fill />}
